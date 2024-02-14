@@ -1,14 +1,15 @@
 require('dotenv').config({ path: './mongo.env' });
 const express = require('express');
-const cors = require('cors');
 const mongoose = require('mongoose');
 const winston = require('winston');
+const cors = require('cors'); // Require cors
 const projectRoutes = require('./routes/projectRoutes'); // Import project routes
+const userRoutes = require('./routes/userRoutes'); // Import user routes
 
 // Initialize Winston logger
 const logger = winston.createLogger({
   transports: [
-    new winston.transports.Console(), // Log to console
+    new winston.transports.Console(), // Log to
     new winston.transports.File({ filename: 'error.log', level: 'error' }) // Log errors to a file
   ],
   format: winston.format.combine(
@@ -26,8 +27,8 @@ app.use((req, res, next) => {
 });
 
 // Middleware
+app.use(cors()); // Use cors middleware
 app.use(express.json());
-app.use(cors({ origin: 'http://localhost:8080' })); // Allow requests from localhost:8080
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)
@@ -39,6 +40,7 @@ mongoose.connect(process.env.MONGODB_URI)
 
 // Mount project routes
 app.use('/api/projects', projectRoutes);
+app.use('/api/users', userRoutes);
 
 // Start server
 const PORT = process.env.PORT || 3000;

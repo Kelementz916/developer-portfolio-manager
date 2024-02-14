@@ -16,7 +16,7 @@ exports.getProject = async (req, res) => {
   try {
     const project = await Project.findById(req.params.projectId);
     if (project == null) {
-      return res.status(404).json({ message: 'Cannot find project' });
+      return res.status(404).json({ message: 'Cannot find project. The database might be empty.' });
     }
     res.json(project);
   } catch (error) {

@@ -55,7 +55,17 @@ const config = {
       new TerserPlugin(),
       new CssMinimizerPlugin(),
     ]
-  }
+  },
+  devServer: {
+    proxy: [
+      {
+        context: ['/api'], // adjust this if your API requests are to a different path
+        target: 'http://localhost:3000',
+        secure: false,
+        changeOrigin: true,
+      },
+    ],
+  },
 };
 
 module.exports = config;

@@ -1,14 +1,11 @@
 // controllers/userController.js
 const User = require('../models/User');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 
 exports.signup = async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new User({ username, password: hashedPassword });
+    const user = new User({ username, password });
     const newUser = await user.save();
 
     res.status(201).json(newUser);
@@ -22,12 +19,11 @@ exports.login = async (req, res) => {
 
   try {
     const user = await User.findOne({ username });
-    if (!user || !await bcrypt.compare(password, user.password)) {
+    if (!user || password !== user.password) {
       throw new Error('Invalid username or password');
     }
 
-    const token = jwt.sign({ userId: user._id }, 'secret_key'); // Replace 'secret_key' with your actual secret key
-    res.json({ token });
+    res.json({ message: 'Login successful' });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -37,7 +33,7 @@ exports.getUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.userId);
     if (user == null) {
-      return res.status(404).json({ message: 'Cannot find user' });
+      return res.status(404).json({ message: 'Cannot find user. The database might be empty.' });
     }
     res.json(user);
   } catch (error) {

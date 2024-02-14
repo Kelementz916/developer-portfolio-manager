@@ -4,15 +4,15 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 function UserProfile() {
-  const { id } = useParams();
+  const { userId } = useParams(); // Changed from id to userId
   const [user, setUser] = useState({ projects: [] });
 
   useEffect(() => {
-    fetch(`http://localhost:3000/users/${id}`)
+    fetch(`http://localhost:3000/users/${userId}`) // Changed from id to userId
       .then(response => response.json())
       .then(data => setUser(data))
       .catch(error => console.error('Error fetching user:', error));
-  }, [id]);
+  }, [userId]); // Changed from id to userId
 
   return (
     <div>
