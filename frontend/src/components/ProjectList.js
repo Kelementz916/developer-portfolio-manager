@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const ProjectList = () => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    // Fetch projects from backend
-    // Example:
-    // fetch('/api/projects')
-    //   .then(response => response.json())
-    //   .then(data => setProjects(data))
-    //   .catch(error => console.error('Error fetching projects:', error));
+    fetch('http://localhost:3000/projects')
+      .then(response => response.json())
+      .then(data => setProjects(data))
+      .catch(error => console.error('Error fetching projects:', error));
   }, []);
 
   return (
@@ -17,7 +16,9 @@ const ProjectList = () => {
       <h2>Projects</h2>
       <ul>
         {projects.map(project => (
-          <li key={project._id}>{project.title}</li>
+          <li key={project._id}>
+            <Link to={`/project/${project._id}`}>{project.title}</Link>
+          </li>
         ))}
       </ul>
     </div>
