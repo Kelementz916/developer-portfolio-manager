@@ -1,24 +1,13 @@
+import React from 'react';
+import ProjectList from './components/ProjectList';
 
-import React from "react";
-import Button from '@material-ui/core/Button';
-import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-class App extends React.Component {
-  render() {
-    const { name } = this.props;
-    return (
-      <>
-        <h1 className="text-4xl text-white bg-black">
-          Hello {name}
-        </h1>
-        <Button variant="contained">this is a material UI button</Button>
-        <button type="button" class="btn btn-primary">
-          This is a bootstrap button
-        </button>
-      </>
-    );
-  }
-}
+const App = () => {
+  return (
+    <div>
+      <h1>Developer Portfolio Manager</h1>
+      <ProjectList />
+    </div>
+  );
+};
 
 export default App;

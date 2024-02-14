@@ -1,12 +1,17 @@
-const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const config = {
-  entry: './src/index.js',
+  mode: 'development',
+  entry: {
+    frontend: './frontend/src/index.js', // Frontend entry point
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: '[name].bundle.js' // Output frontend bundle
   },
   module: {
     rules: [
@@ -18,59 +23,39 @@ const config = {
       {
         test: /\.css$/,
         use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1
-            }
-          },
-          'postcss-loader'
-        ],
-        exclude: /\.module\.css$/
-      },
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-              modules: true
-            }
-          },
-          'postcss-loader'
-        ],
-        include: /\.module\.css$/
-      },
-      {
-        test: /\.png$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              mimetype: 'image/png'
-            }
-          }
+          MiniCssExtractPlugin.loader,
+          'css-loader'
         ]
       },
       {
         test: /\.scss$/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           'css-loader',
           'sass-loader'
         ]
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif|svg)$/,
+        type: 'asset/resource'
       }
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
-      templateContent: ({ htmlWebpackPlugin }) => '<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>' + htmlWebpackPlugin.options.title + '</title></head><body><div id=\"app\"></div></body></html>',
-      filename: 'index.html',
+      template: './frontend/public/index.html',
+      chunks: ['frontend'] // Specify only the frontend bundle for this HtmlWebpackPlugin
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css',
     })
-  ]
+  ],
+  optimization: {
+    minimizer: [
+      new TerserPlugin(),
+      new CssMinimizerPlugin(),
+    ]
+  }
 };
 
 module.exports = config;
