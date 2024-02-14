@@ -1,9 +1,11 @@
+// models/Project.js
 const mongoose = require('mongoose');
 
-const projectSchema = new mongoose.Schema({
+const ProjectSchema = new mongoose.Schema({
   title: String,
   description: String,
-  // Add more fields as needed
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  // Add any other fields you need for your projects
 });
 
-module.exports = mongoose.model('Project', projectSchema);
+module.exports = mongoose.model('Project', ProjectSchema);

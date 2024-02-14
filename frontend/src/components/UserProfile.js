@@ -1,10 +1,19 @@
 // frontend/src/components/UserProfile.js
 
-import React from 'react';
-
-const user = { id: 1, name: 'User 1', projects: ['Project 1', 'Project 2'] };
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 function UserProfile() {
+  const { id } = useParams();
+  const [user, setUser] = useState({ projects: [] });
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/users/${id}`)
+      .then(response => response.json())
+      .then(data => setUser(data))
+      .catch(error => console.error('Error fetching user:', error));
+  }, [id]);
+
   return (
     <div>
       <h2>{user.name}</h2>

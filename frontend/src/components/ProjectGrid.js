@@ -1,17 +1,20 @@
-import React from 'react';
-
-const projects = [
-  { id: 1, name: 'Project 1', description: 'This is project 1' },
-  { id: 2, name: 'Project 2', description: 'This is project 2' },
-  // Add more projects as needed
-];
+import React, { useEffect, useState } from 'react';
 
 function ProjectGrid() {
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/projects')
+      .then(response => response.json())
+      .then(data => setProjects(data))
+      .catch(error => console.error('Error fetching projects:', error));
+  }, []);
+
   return (
     <div>
       {projects.map(project => (
-        <div key={project.id}>
-          <h2>{project.name}</h2>
+        <div key={project._id}>
+          <h2>{project.title}</h2>
           <p>{project.description}</p>
         </div>
       ))}
