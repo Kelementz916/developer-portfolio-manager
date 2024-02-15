@@ -60,7 +60,7 @@ const config = {
   devServer: {
     proxy: [
       {
-        context: ['/api'],
+        context: ['/'],
         target: 'http://localhost:3000',
         secure: false,
         changeOrigin: true,
