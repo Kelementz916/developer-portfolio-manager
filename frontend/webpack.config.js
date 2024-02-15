@@ -11,7 +11,8 @@ const config = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].bundle.js'
+    filename: '[name].bundle.js',
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -24,8 +25,7 @@ const config = {
         test: /\.css$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader', // Add this
+          'css-loader', 
         ]
       },
       {
@@ -48,7 +48,7 @@ const config = {
       chunks: ['main']
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css',
+      filename: 'styles.css',
     })
   ],
   optimization: {

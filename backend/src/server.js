@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const winston = require('winston');
 const cors = require('cors'); // Require cors
+const path = require('path');
 const projectRoutes = require('./routes/projectRoutes'); // Import project routes
 const userRoutes = require('./routes/userRoutes'); // Import user routes
 const userController = require('./controllers/userController'); // Import user controller
@@ -30,6 +31,8 @@ app.use((req, res, next) => {
 // Middleware
 app.use(cors()); // Use cors middleware
 app.use(express.json());
+
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
 // Connect to MongoDB
 const MONGODB_URI='mongodb+srv://kevincan321:COCjqfZxVy2BwHQW@developer-portfolio-db.gnwpwrj.mongodb.net/?retryWrites=true&w=majority';

@@ -1,3 +1,97 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+/* Set up Behance-inspired colors */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Define global styles */
+body {
+    font-family: 'Roboto', sans-serif; /* Use Roboto font for body text */
+    background: linear-gradient(135deg, #4b6cb7, #182848); /* Initial gradient */
+    background-size: 400% 400%; /* Increase the background size */
+    animation: flowBackground 20s ease infinite; /* Apply animation */
+}
+
+@keyframes flowBackground {
+    0% {
+        background-position: 0% 50%; /* Start position */
+    }
+    50% {
+        background-position: 100% 50%; /* Middle position */
+    }
+    100% {
+        background-position: 0% 50%; /* End position */
+    }
+}
+
+.container {
+    max-width: 1200px; /* Set max width for content */
+    margin: 0 auto; /* Center content horizontally */
+    padding: 0 20px; /* Add horizontal padding */
+}
+
+/* Define a class for your header */
+.header {
+    background-color: #15202B; /* Behance header background color */
+    color: #ffffff; /* White text color */
+    padding: 20px 0; /* Add top and bottom padding */
+    text-align: center; /* Center align text */
+}
+
+.header h1 {
+    font-size: 36px; /* Larger font size for header */
+    margin: 0; /* Remove default margins */
+}
+
+/* Define a class for your navigation */
+.navbar {
+    background-color: #15202B; /* Behance navbar background color */
+    padding: 16px 20px; /* Add top and bottom padding */
+    display: flex; /* Use flexbox to align items */
+    justify-content: space-between; /* Align items from left to right */
+    align-items: center; /* Vertically center align items */
+}
+
+.navbar ul {
+    list-style-type: none; /* Remove bullet points */
+    margin: 0; /* Remove default margins */
+    padding: 0; /* Remove default padding */
+    display: flex; /* Use flexbox to align items */
+}
+
+.navbar li {
+    margin-right: 20px; /* Add right margin between items */
+}
+
+.navbar li:last-child {
+    margin-right: 0; /* Remove right margin for last item */
+}
+
+.navbar a {
+    color: #ffffff; /* White text color */
+    text-decoration: none; /* Remove underline */
+    font-size: 18px; /* Font size for navbar links */
+}
+
+.navbar a:hover {
+    color: #0077b5; /* Behance blue color on hover */
+}
+
+/* Define a class for your main content area */
+.main {
+    padding: 20px 0; /* Add top and bottom padding */
+}
+
+/* Define a class for your footer */
+.footer {
+    background-color: #15202B; /* Behance footer background color */
+    color: #ffffff; /* White text color */
+    padding: 20px 0; /* Add top and bottom padding */
+    text-align: center; /* Center align text */
+}
+
+.footer p {
+    font-size: 14px; /* Font size for footer text */
+    margin: 0; /* Remove default margins */
+}
+  
+  
