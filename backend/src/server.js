@@ -5,6 +5,7 @@ const winston = require('winston');
 const cors = require('cors'); // Require cors
 const projectRoutes = require('./routes/projectRoutes'); // Import project routes
 const userRoutes = require('./routes/userRoutes'); // Import user routes
+const userController = require('./controllers/userController'); // Import user controller
 
 // Initialize Winston logger
 const logger = winston.createLogger({
@@ -31,7 +32,9 @@ app.use(cors()); // Use cors middleware
 app.use(express.json());
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI)
+const MONGODB_URI='mongodb+srv://kevincan321:COCjqfZxVy2BwHQW@developer-portfolio-db.gnwpwrj.mongodb.net/?retryWrites=true&w=majority';
+
+mongoose.connect(MONGODB_URI)
     .then(() => logger.info('Connected to MongoDB Atlas')) // Log successful connection
     .catch((error) => {
       logger.error('Error connecting to MongoDB Atlas:', error); // Log error connecting to MongoDB
@@ -39,8 +42,11 @@ mongoose.connect(process.env.MONGODB_URI)
     });
 
 // Mount project routes
-app.use('/api/projects', projectRoutes);
-app.use('/api/users', userRoutes);
+app.use('/projects', projectRoutes);
+app.use('/user', userRoutes);
+app.use('/signup', userRoutes);
+app.post('/login', userController.login);
+
 
 // Start server
 const PORT = process.env.PORT || 3000;

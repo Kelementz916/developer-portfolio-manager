@@ -7,14 +7,14 @@ const ProjectList = () => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/projects') // Updated fetch URL
+    fetch('http://localhost:3000/projects') // Updated fetch URL
       .then(response => response.json())
       .then(data => setProjects(data))
       .catch(error => console.error('Error fetching projects:', error));
   }, []);
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:3000/api/projects/${id}`, { // Updated fetch URL
+    fetch(`http://localhost:3000/projects/${id}`, { // Updated fetch URL
       method: 'DELETE',
     })
     .then(() => {

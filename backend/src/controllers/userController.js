@@ -31,7 +31,7 @@ exports.login = async (req, res) => {
 
 exports.getUser = async (req, res) => {
   try {
-    const user = await User.findById(req.params.userId);
+    const user = await User.findOne({username: req.params.userId});
     if (user == null) {
       return res.status(404).json({ message: 'Cannot find user. The database might be empty.' });
     }

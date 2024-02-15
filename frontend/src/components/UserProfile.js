@@ -20,7 +20,7 @@ function UserProfile() {
       <h3>Projects</h3>
       <ul>
         {user.projects.map((project, index) => (
-          <li key={index}>{project}</li>
+          <li key={index}>{project.name}</li>
         ))}
       </ul>
     </div>
