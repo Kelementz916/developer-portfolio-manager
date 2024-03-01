@@ -35,7 +35,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
 // Connect to MongoDB
-const MONGODB_URI='mongodb+srv://kevincan321:COCjqfZxVy2BwHQW@developer-portfolio-db.gnwpwrj.mongodb.net/?retryWrites=true&w=majority';
+const MONGODB_URI= //insert uri;
 
 mongoose.connect(MONGODB_URI)
     .then(() => logger.info('Connected to MongoDB Atlas')) // Log successful connection
